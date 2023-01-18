@@ -33,7 +33,7 @@ test = [
     "flake8-bugbear==23.1.17",
     "flake8-docstrings",
     "flake8-formatter_junit_xml",
-    "flake8==6.0.0",
+    "flake8==5.0.4",
     "pre-commit==2.17.0",
     "pylint==2.12.2",
     "pylint_junit",
@@ -51,7 +51,7 @@ Source = "https://github.com/microsoft/python-package-template"
 Tracker = "https://github.com/microsoft/python-package-template/issues"
 
 [tool.flit.module]
-name = "python_package"
+name = "itersolve"
 
 [tool.bandit]
 exclude_dirs = ["build","dist","tests","scripts"]
@@ -60,7 +60,7 @@ recursive = true
 targets = "src"
 
 [tool.black]
-line-length = 120
+line-length = 79
 fast = true
 
 [tool.coverage.run]
@@ -198,7 +198,7 @@ variable-naming-style="snake_case"
 ignore-long-lines="^\\s*(# )?.*['\"]?<?https?://\\S+>?"
 indent-after-paren=4
 indent-string='    '
-max-line-length=120
+max-line-length=79
 max-module-lines=1000
 no-space-check= [
     "trailing-comma",
