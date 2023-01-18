@@ -60,7 +60,7 @@ recursive = true
 targets = "src"
 
 [tool.black]
-line-length = 120
+line-length = 799
 fast = true
 
 [tool.coverage.run]
@@ -198,7 +198,7 @@ variable-naming-style="snake_case"
 ignore-long-lines="^\\s*(# )?.*['\"]?<?https?://\\S+>?"
 indent-after-paren=4
 indent-string='    '
-max-line-length=120
+max-line-length=79
 max-module-lines=1000
 no-space-check= [
     "trailing-comma",
