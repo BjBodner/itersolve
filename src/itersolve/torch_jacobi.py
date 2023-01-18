@@ -64,7 +64,9 @@ def torch_jacobi_solve(
     return x
 
 
-def get_random_diagonally_dominant_matrix(dim, conditioning_factor=1, sparsity=0.9):
+def get_random_diagonally_dominant_matrix(
+    dim, conditioning_factor=1, sparsity=0.9
+):
     """Returns a random diagonally dominant matrix"""
     A = torch.randn(dim, dim, requires_grad=False) ** 2
 
@@ -78,7 +80,9 @@ def get_random_diagonally_dominant_matrix(dim, conditioning_factor=1, sparsity=0
     A += A.sum(1).diag(0) + 1
 
     # make ill conditioned
-    conditioner = torch.diag(torch.arange(1, conditioning_factor + 1, conditioning_factor / dim))
+    conditioner = torch.diag(
+        torch.arange(1, conditioning_factor + 1, conditioning_factor / dim)
+    )
     A = conditioner @ A
     return A
 
@@ -90,7 +94,9 @@ if __name__ == "__main__":
     sparsity = 0.99
     lr = 0.5
     torch.manual_seed(1)
-    A = get_random_diagonally_dominant_matrix(dim, conditioning_factor, sparsity=sparsity)
+    A = get_random_diagonally_dominant_matrix(
+        dim, conditioning_factor, sparsity=sparsity
+    )
     b = torch.randn(dim, requires_grad=False)
 
     t1 = time.time()
@@ -98,7 +104,9 @@ if __name__ == "__main__":
     direct_time = time.time() - t1
 
     t1 = time.time()
-    sol = torch_jacobi_solve(A, b, optimizer="SGD", hparams={"lr": lr, "momentum": 0.1}, seed=1)
+    sol = torch_jacobi_solve(
+        A, b, optimizer="SGD", hparams={"lr": lr, "momentum": 0.1}, seed=1
+    )
     optimizer_jacobi_time = time.time() - t1
 
     # torch.manual_seed(1)
