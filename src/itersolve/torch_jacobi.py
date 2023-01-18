@@ -14,7 +14,6 @@ def torch_jacobi_solve(A, b, optimizer="Adam", hparams={"lr": 0.1}, max_iter=100
         torch.manual_seed(seed)
     x0 = torch.randn(dim, requires_grad=True)
 
-
     # Jacobi decomposition of A
     D = torch.diag(A)
     # R = A - torch.diagflat(D)
@@ -40,7 +39,7 @@ def torch_jacobi_solve(A, b, optimizer="Adam", hparams={"lr": 0.1}, max_iter=100
         # print("Residual: {}".format(residual))
         # if exact_solution is not None:
         #     error = torch.norm(x - exact_solution)
-            # print("Error: {}".format(error))
+        # print("Error: {}".format(error))
 
         # if torch.norm(x - x_prev) < tol:
         #     print("Converged in {} iterations".format(i))
@@ -57,7 +56,7 @@ def torch_jacobi_solve(A, b, optimizer="Adam", hparams={"lr": 0.1}, max_iter=100
 
 def get_random_diagonally_dominant_matrix(dim, conditioning_factor=1, sparsity=0.9):
     """Returns a random diagonally dominant matrix"""
-    A = torch.randn(dim, dim, requires_grad=False)**2
+    A = torch.randn(dim, dim, requires_grad=False) ** 2
 
     # make symmetric
     A = A + A.T
@@ -76,14 +75,13 @@ def get_random_diagonally_dominant_matrix(dim, conditioning_factor=1, sparsity=0
 
 if __name__ == "__main__":
 
-    dim=3000
+    dim = 3000
     conditioning_factor = 5000
     sparsity = 0.99
     lr = 0.5
     torch.manual_seed(1)
     A = get_random_diagonally_dominant_matrix(dim, conditioning_factor, sparsity=sparsity)
     b = torch.randn(dim, requires_grad=False)
-
 
     t1 = time.time()
     exact_solution = torch.linalg.solve(A, b)
