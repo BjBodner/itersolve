@@ -113,10 +113,6 @@ envlist = py, integration, spark, all
 commands =
     pytest -m "not integration and not spark" {posargs}
 
-[testenv:integration]
-commands =
-    pytest -m "integration" {posargs}
-
 [testenv:spark]
 extras = spark
 setenv =
