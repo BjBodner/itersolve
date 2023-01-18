@@ -14,8 +14,8 @@ This uses a pyproject.yaml to configuration the project. In this example, [flit]
   - workflows - Contains GitHub Actions used for building, testing and publishing.
     - publish-test.yml - Publish wheels to [https://test.pypi.org/](https://test.pypi.org/)
     - publish.yml - Publish wheels to [https://pypi.org/](https://pypi.org/)
-    - pull-request.yml - Build and Test pull requests before commiting to main.
-    - template-sync.yml - Update GitHub Repo with enhancments to base template
+    - pull-request.yml - Build and Test pull requests before committing to main.
+    - template-sync.yml - Update GitHub Repo with enhancements to base template
 - docs - collect documents (default format .md)
 - src - place new source code here
   - python_package - sample package (this can be deleted when creating a new repository)
@@ -68,7 +68,7 @@ This section defines the project metadata, which may have been previously contai
 
 #### optional-dependencies
 This are otpimal dependancey groups that can be installed via 'pip install .[tests]'.
-One group is included for dependancies required for testing. A second group is included for PySpark based dependancies.
+One group is included for dependencies required for testing. A second group is included for PySpark based dependencies.
 
 ### tool
 This section defines the configurations for additional tools used to format, lint, type-check, and analysis Python code.
@@ -92,7 +92,7 @@ Configures various test markers used during testing.
 Performs Linting and Static Analysis. Any modifictions made by the auto-formater (black) are always considered correct.
 
 ## Publish to PyPi from GitHub
-In order to publish to PyPi, a repostirory secret must be created, "PYPI_PASSWORD". In order to publish to the Test PyPi, a second secret must be added, "TEST_PYPI_PASSWORD". 
+In order to publish to PyPi, a repostirory secret must be created, "PYPI_PASSWORD". In order to publish to the Test PyPi, a second secret must be added, "TEST_PYPI_PASSWORD".
 
 
 ## Contributing

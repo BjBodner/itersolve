@@ -1,6 +1,10 @@
+from __future__ import annotations
+
+import time
+
 import torch
 from torch.optim import Adam
-import time
+
 
 def torch_jacobi_solve(A, b, optimizer="Adam", hparams={"lr": 0.1}, max_iter=1000, residual_tol=1e-5, seed=None):
     """Solves the equation Ax=b via the Jacobi iterative method, using pytorch optimizers"""
@@ -33,7 +37,7 @@ def torch_jacobi_solve(A, b, optimizer="Adam", hparams={"lr": 0.1}, max_iter=100
         else:
             x = x_prev + hparams["lr"] * ((b - torch.mv(A, x_prev)) / D)
 
-        # print("Residual: {}".format(redidual))
+        # print("Residual: {}".format(residual))
         # if exact_solution is not None:
         #     error = torch.norm(x - exact_solution)
             # print("Error: {}".format(error))
@@ -41,13 +45,13 @@ def torch_jacobi_solve(A, b, optimizer="Adam", hparams={"lr": 0.1}, max_iter=100
         # if torch.norm(x - x_prev) < tol:
         #     print("Converged in {} iterations".format(i))
         #     break
-        
+
         if torch.norm(A @ x - b) < residual_tol:
-            print("Converged in {} iterations".format(i))
+            print(f"Converged in {i} iterations")
             break
 
     if i == max_iter - 1:
-        print("Max iterations reached with torch.norm(x - x_prev) = {}".format(torch.norm(x - x_prev)))
+        print(f"Max iterations reached with torch.norm(x - x_prev) = {torch.norm(x - x_prev)}")
     return x
 
 
@@ -56,7 +60,7 @@ def get_random_diagonally_dominant_matrix(dim, conditioning_factor=1, sparsity=0
     A = torch.randn(dim, dim, requires_grad=False)**2
 
     # make symmetric
-    A = A + A.T 
+    A = A + A.T
 
     # make sparse
     A = A * (torch.rand(dim, dim, requires_grad=False) < sparsity)
@@ -66,7 +70,7 @@ def get_random_diagonally_dominant_matrix(dim, conditioning_factor=1, sparsity=0
 
     # make ill conditioned
     conditioner = torch.diag(torch.arange(1, conditioning_factor + 1, conditioning_factor / dim))
-    A = conditioner @ A 
+    A = conditioner @ A
     return A
 
 
@@ -96,6 +100,6 @@ if __name__ == "__main__":
     sol = torch_jacobi_solve(A, b, optimizer=None, hparams={"lr": lr}, seed=1)
     weighted_jacobi_time = time.time() - t1
 
-    print("Time to solve Ax=b direct: {}".format(direct_time))
-    print("Time to solve Ax=b via optimizer Jacobi: {}".format(optimizer_jacobi_time))
-    print("Time to solve Ax=b via weighted Jacobi: {}".format(weighted_jacobi_time))
+    print(f"Time to solve Ax=b direct: {direct_time}")
+    print(f"Time to solve Ax=b via optimizer Jacobi: {optimizer_jacobi_time}")
+    print(f"Time to solve Ax=b via weighted Jacobi: {weighted_jacobi_time}")
