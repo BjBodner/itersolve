@@ -6,8 +6,17 @@ import torch
 from torch.optim import Adam
 
 
-def torch_jacobi_solve(A, b, optimizer="Adam", hparams={"lr": 0.1}, max_iter=1000, residual_tol=1e-5, seed=None):
-    """Solves the equation Ax=b via the Jacobi iterative method, using pytorch optimizers"""
+def torch_jacobi_solve(
+    A,
+    b,
+    optimizer="Adam",
+    hparams={"lr": 0.1},
+    max_iter=1000,
+    residual_tol=1e-5,
+    seed=None,
+):
+    """Solves the equation Ax=b via the Jacobi iterative method,
+    using pytorch optimizers"""
 
     # set seed
     if seed is not None:
@@ -50,7 +59,8 @@ def torch_jacobi_solve(A, b, optimizer="Adam", hparams={"lr": 0.1}, max_iter=100
             break
 
     if i == max_iter - 1:
-        print(f"Max iterations reached with torch.norm(x - x_prev) = {torch.norm(x - x_prev)}")
+        norm_diff = torch.norm(x - x_prev)
+        print(f"Max iterations reached, torch.norm(x - x_prev) = {norm_diff}")
     return x
 
 
