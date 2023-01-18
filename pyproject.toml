@@ -3,9 +3,9 @@ requires = ["flit"]
 build-backend = "flit.buildapi"
 
 [project]
-name =  "py-project-toml"
+name =  "itersolve"
 authors = [
-    {name = "Benjamin B Bodner", email = "benjybo7@gamil.com"},
+    {name = "Benjamin Jacob Bodner", email = "benjybo7@gamil.com"},
 ]
 description = "A PyTorch-Based Package for Solving high Dimensional Linear Equations Using Iterative Algorithms"
 readme = "README.md"

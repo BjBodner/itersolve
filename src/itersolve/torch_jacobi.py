@@ -30,6 +30,8 @@ def torch_jacobi_solve(
     if optimizer is not None:
         optimizer_constructor = getattr(torch.optim, optimizer)
         torch_optimizer = optimizer_constructor([x0], **hparams)
+    else:
+        torch_optimizer = torch.optim.SGD([x0], lr=0.1)
 
     # Iterate until convergence or until max_iter
     x = x0
@@ -37,13 +39,12 @@ def torch_jacobi_solve(
     x_prev = x.clone()
     for i in range(max_iter):
 
-        if torch_optimizer is not None:
-            torch_optimizer.zero_grad()
-            grad = -((b - torch.mv(A, x_prev)) / D)
-            x.grad = grad
-            torch_optimizer.step()
-        else:
-            x = x_prev + hparams["lr"] * ((b - torch.mv(A, x_prev)) / D)
+        torch_optimizer.zero_grad()
+        grad = -((b - torch.mv(A, x_prev)) / D)
+        x.grad = grad
+        torch_optimizer.step()
+        # else:
+        #     x = x_prev + hparams["lr"] * ((b - torch.mv(A, x_prev)) / D)
 
         x_prev = x.clone()
 
