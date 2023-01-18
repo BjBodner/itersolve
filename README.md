@@ -1,3 +1,7 @@
+# IterSolve
+A PyTorch-based package for solving high dimensional linear equations using iterative algorithms
+
+
 # Python Project Template
 
 This project follows the Python Standards declared in [PEP 621](https://peps.python.org/pep-0621/).
