@@ -1,5 +1,5 @@
 from __future__ import annotations
 
 
-def dummy_test():
+def test_nothing():
     assert True

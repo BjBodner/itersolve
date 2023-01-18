@@ -12,7 +12,7 @@ def torch_jacobi_solve(
     hparams: dict = {"lr": 0.1},
     max_iter: int = 1000,
     residual_tol: float = 1e-5,
-    seed: int = None,
+    seed: int | None = None,
 ) -> torch.Tensor:
     """Solves the equation Ax=b via the Jacobi iterative method,
     using pytorch optimizers"""
@@ -29,7 +29,7 @@ def torch_jacobi_solve(
     # create optimizer
     if optimizer is not None:
         optimizer_constructor = getattr(torch.optim, optimizer)
-        optimizer = optimizer_constructor([x0], **hparams)
+        torch_optimizer = optimizer_constructor([x0], **hparams)
 
     # Iterate until convergence or until max_iter
     x = x0
@@ -37,11 +37,11 @@ def torch_jacobi_solve(
     x_prev = x.clone()
     for i in range(max_iter):
 
-        if optimizer is not None:
-            optimizer.zero_grad()
+        if torch_optimizer is not None:
+            torch_optimizer.zero_grad()
             grad = -((b - torch.mv(A, x_prev)) / D)
             x.grad = grad
-            optimizer.step()
+            torch_optimizer.step()
         else:
             x = x_prev + hparams["lr"] * ((b - torch.mv(A, x_prev)) / D)
 
