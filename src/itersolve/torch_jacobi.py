@@ -1,19 +1,20 @@
 from __future__ import annotations
 
 import time
+from typing import Dict, Union
 
 import torch
 
 
 def torch_jacobi_solve(
-    A,
-    b,
-    optimizer="Adam",
-    hparams={"lr": 0.1},
-    max_iter=1000,
-    residual_tol=1e-5,
-    seed=None,
-):
+    A: torch.Tensor,
+    b: torch.Tensor,
+    optimizer: str | None = None,
+    hparams: dict = {"lr": 0.1},
+    max_iter: int = 1000,
+    residual_tol: float = 1e-5,
+    seed: int = None,
+) -> torch.Tensor:
     """Solves the equation Ax=b via the Jacobi iterative method,
     using pytorch optimizers"""
 
@@ -33,8 +34,9 @@ def torch_jacobi_solve(
 
     # Iterate until convergence or until max_iter
     x = x0
+    i = 0
+    x_prev = x.clone()
     for i in range(max_iter):
-        x_prev = x.clone()
 
         if optimizer is not None:
             optimizer.zero_grad()
@@ -43,6 +45,8 @@ def torch_jacobi_solve(
             optimizer.step()
         else:
             x = x_prev + hparams["lr"] * ((b - torch.mv(A, x_prev)) / D)
+
+        x_prev = x.clone()
 
         # print("Residual: {}".format(residual))
         # if exact_solution is not None:
@@ -64,7 +68,7 @@ def torch_jacobi_solve(
 
 
 def get_random_diagonally_dominant_matrix(
-    dim, conditioning_factor=1, sparsity=0.9
+    dim: int, conditioning_factor: float = 1.0, sparsity: float = 0.9
 ):
     """Returns a random diagonally dominant matrix"""
     A = torch.randn(dim, dim, requires_grad=False) ** 2

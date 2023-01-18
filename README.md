@@ -1,5 +1,5 @@
 # IterSolve
-A PyTorch-based package for solving high dimensional linear equations using iterative algorithms
+A PyTorch-based package for solving high dimensional linear equations using iterative algorithms.
 
 
 # Python Project Template

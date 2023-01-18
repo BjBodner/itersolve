@@ -5,9 +5,9 @@ build-backend = "flit.buildapi"
 [project]
 name =  "py-project-toml"
 authors = [
-    {name = "Daniel Ciborowski", email = "dciborow@microsoft.com"},
+    {name = "Benjamin B Bodner", email = "benjybo7@gamil.com"},
 ]
-description = "Sample Python Project for creating a new Python Module"
+description = "A PyTorch-Based Package for Solving high Dimensional Linear Equations Using Iterative Algorithms"
 readme = "README.md"
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -42,7 +42,8 @@ test = [
     "pytest-runner",
     "pytest==7.1.0",
     "pytest-github-actions-annotate-failures",
-    "shellcheck-py==0.9.0.2"
+    "shellcheck-py==0.9.0.2",
+    "torch=>=1.10.1"
 ]
 
 [project.urls]
