@@ -3,7 +3,6 @@ from __future__ import annotations
 import time
 
 import torch
-from torch.optim import Adam
 
 
 def torch_jacobi_solve(
