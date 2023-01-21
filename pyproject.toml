@@ -3,11 +3,11 @@ requires = ["flit"]
 build-backend = "flit.buildapi"
 
 [project]
-name =  "py-project-toml"
+name =  "itersolve"
 authors = [
-    {name = "Daniel Ciborowski", email = "dciborow@microsoft.com"},
+    {name = "Benjamin Jacob Bodner", email = "benjybo7@gamil.com"},
 ]
-description = "Sample Python Project for creating a new Python Module"
+description = "A PyTorch-Based Package for Solving high Dimensional Linear Equations Using Iterative Algorithms"
 readme = "README.md"
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -33,25 +33,26 @@ test = [
     "flake8-bugbear==23.1.17",
     "flake8-docstrings",
     "flake8-formatter_junit_xml",
-    "flake8==6.0.0",
+    "flake8~=4.0.1",
     "pre-commit==2.17.0",
-    "pylint==2.12.2",
+    "pylint~=2.12.2",
     "pylint_junit",
     "pytest-cov==3.0.0",
     "pytest-mock<3.10.1",
     "pytest-runner",
     "pytest==7.1.0",
     "pytest-github-actions-annotate-failures",
-    "shellcheck-py==0.9.0.2"
+    "shellcheck-py==0.9.0.2",
+    "torch>=1.10.1"
 ]
 
 [project.urls]
-Documentation = "https://github.com/microsoft/python-package-template/tree/main#readme"
-Source = "https://github.com/microsoft/python-package-template"
-Tracker = "https://github.com/microsoft/python-package-template/issues"
+Documentation = "https://github.com/BjBodner/itersolve/blob/main/README.md"
+Source = "https://github.com/BjBodner/itersolve"
+Tracker = "https://github.com/BjBodner/itersolve/issues"
 
 [tool.flit.module]
-name = "python_package"
+name = "itersolve"
 
 [tool.bandit]
 exclude_dirs = ["build","dist","tests","scripts"]
@@ -60,7 +61,7 @@ recursive = true
 targets = "src"
 
 [tool.black]
-line-length = 120
+line-length = 79
 fast = true
 
 [tool.coverage.run]
@@ -111,10 +112,6 @@ envlist = py, integration, spark, all
 [testenv]
 commands =
     pytest -m "not integration and not spark" {posargs}
-
-[testenv:integration]
-commands =
-    pytest -m "integration" {posargs}
 
 [testenv:spark]
 extras = spark
@@ -198,7 +195,7 @@ variable-naming-style="snake_case"
 ignore-long-lines="^\\s*(# )?.*['\"]?<?https?://\\S+>?"
 indent-after-paren=4
 indent-string='    '
-max-line-length=120
+max-line-length=79
 max-module-lines=1000
 no-space-check= [
     "trailing-comma",
